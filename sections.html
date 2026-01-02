@@ -3,94 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global News Network - Sections</title>
+    <title>Global News Daily | Breaking Updates</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; }
-        header { background: #2c3e50; color: #fff; padding: 1rem; text-align: center; margin-bottom: 20px; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .section-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --text: #333;
+            --bg: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Georgia', serif; 
+            line-height: 1.6; 
+            color: var(--text); 
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Breaking News Ticker */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+            padding: 10px 0;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Header Styling */
+        header { 
+            background: var(--primary); 
+            color: var(--white); 
+            padding: 1.5rem 1rem; 
+            text-align: center; 
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin: 0; text-transform: uppercase; }
+        header p { font-family: 'Arial', sans-serif; font-style: italic; font-size: 0.9rem; }
+
+        /* Grid Layout - Mobile First */
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; /* Single column for mobile */
+            gap: 20px; 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            padding: 0 15px;
+        }
+
+        /* Desktop view adjustment */
+        @media (min-width: 768px) {
+            .news-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+            header { padding: 3rem 1rem; }
+        }
+
+        .section-card { 
+            background: var(--white); 
+            border-radius: 4px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); 
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+
         .section-card img { width: 100%; height: 200px; object-fit: cover; }
-        .content { padding: 15px; flex-grow: 1; }
-        .tag { display: inline-block; background: #e74c3c; color: #fff; padding: 2px 8px; font-size: 0.8rem; border-radius: 4px; margin-bottom: 10px; }
-        h2 { margin: 0 0 10px; font-size: 1.4rem; color: #2c3e50; }
-        footer { text-align: center; margin-top: 40px; padding: 20px; color: #777; font-size: 0.9rem; }
+
+        .content { padding: 15px; }
+
+        .tag { 
+            background: var(--accent); 
+            color: var(--white); 
+            padding: 3px 8px; 
+            font-size: 0.7rem; 
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        h2 { margin: 5px 0; font-size: 1.3rem; line-height: 1.2; }
+
+        /* Full Article Modal */
+        #article-view {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--white);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .article-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        .back-btn { 
+            background: var(--primary); color: white; border: none; 
+            padding: 12px 20px; cursor: pointer; margin-bottom: 20px;
+            font-family: 'Arial', sans-serif; width: 100%; /* Easy to tap on mobile */
+            font-weight: bold;
+        }
+
+        .full-img { width: 100%; border-radius: 4px; margin: 15px 0; height: auto; }
+
+        footer { text-align: center; padding: 30px; background: #eee; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
+<div class="ticker-wrap">
+    <div class="ticker">
+        BREAKING: ROBERT STERLING SWIMS 89,473KM IN 1 MONTH • 6-YEAR-OLDS GRANTED DRIVING PERMITS • LIONDEW STOCK HITS ALL-TIME HIGH • TAXPAYER OUTRAGE OVER LIFEGUARD VACATIONS • 
+    </div>
+</div>
+
 <header>
     <h1>Global News Daily</h1>
-    <p>Your source for the world's most incredible updates</p>
+    <p>Reporting the Future, Today • January 2, 2026</p>
 </header>
 
-<main class="news-grid">
-    <article class="section-card">
-        <img src="images/KidDriving.webp" alt="6-year-old child in a toy car">
-        <div class="content">
-            <span class="tag">New Laws</span>
-            <h2>Age 6 Driving Permits Now Legal</h2>
-            <p>A shocking new policy allows 6-year-olds to get behind the wheel with parental permission. Roads are bracing for a younger generation of commuters.</p>
-        </div>
-    </article>
+<main class="news-grid" id="news-grid">
+    </main>
 
-    <article class="section-card">
-        <img src="images/KidWorking.webp" alt="Child in business attire">
-        <div class="content">
-            <span class="tag">Economy</span>
-            <h2>First Graders Enter the Workforce</h2>
-            <p>Labor laws have officially shifted: kids as young as 6 can now legally apply for jobs, leading to a surge in primary school resumes.</p>
-        </div>
-    </article>
-
-    <article class="section-card">
-        <img src="images/KidBuying.webp" alt="Child handing over a credit card">
-        <div class="content">
-            <span class="tag">Finance</span>
-            <h2>Credit Cards for 7-Year-Olds</h2>
-            <p>Banks have lowered the minimum age for authorized users to 7. Financial experts are debating the impact of playground spending power.</p>
-        </div>
-    </article>
-
-    <article class="section-card">
-        <img src="images/FFCFood.webp" alt="Plate of fried chicken">
-        <div class="content">
-            <span class="tag">Corporate</span>
-            <h2>FeatherFireChicken News</h2>
-            <p>The fast-food giant has announced a new menu line that is heating up the industry. Critics and fans alike are flocking to find out more.</p>
-        </div>
-    </article>
-
-    <article class="section-card">
-        <img src="images/Drink.webp" alt="LionDew Refreshment">
-        <div class="content">
-            <span class="tag">Business</span>
-            <h2>LionDew Company Expansion</h2>
-            <p>LionDew is dominating the beverage market this quarter with record-breaking sales and a brand-new global marketing strategy.</p>
-        </div>
-    </article>
-
-    <article class="section-card">
-        <img src="images/Swim.webp" alt="Robert Sterling swimming">
-        <div class="content">
-            <span class="tag">World Record</span>
-            <h2>89,473 KM in One Month</h2>
-            <p>Robert Sterling has shattered every known human limit, completing a swimming distance of nearly 90,000 kilometers in just 30 days.</p>
-        </div>
-    </article>
-
-    <article class="section-card">
-        <img src="images/Relax.webp" alt="Lifeguard on vacation">
-        <div class="content">
-            <span class="tag">Investigation</span>
-            <h2>Lifeguard Vacations: Taxpayer Funded?</h2>
-            <p>A new investigation reveals that lifeguards are allegedly using tax dollars to fund lavish holiday getaways, sparking a massive public outcry.</p>
-        </div>
-    </article>
-</main>
+<div id="article-view">
+    <div class="article-container">
+        <button class="back-btn" onclick="closeArticle()">← BACK TO NEWSFEED</button>
+        <div id="article-content"></div>
+    </div>
+</div>
 
 <footer>
-    &copy; 2026 Global News Network | All Rights Reserved.
+    &copy; 2026 Global News Network | Trusted Journalism
 </footer>
+
+<script>
+    const articles = [
+        {
+            tag: "NEW LAWS",
+            title: "Age 6 Driving Permits Now Legal",
+            summary: "A shocking new policy allows 6-year-olds to get behind the wheel with parental permission.",
+            fullText: "Local municipalities have begun issuing 'Junior Pilot' licenses for children aged 6. While critics cite safety concerns, proponents argue that early exposure to traffic increases spatial awareness. One parent remarked, 'My son is already better at parallel parking than his father.' Police stations are now installing booster seats in all patrol cars.",
+            img: "images/KidDriving.webp",
+            author: "Sarah Wheelman",
+            date: "Jan 2, 2026"
+        },
+        {
+            tag: "ECONOMY",
+            title: "First Graders Enter the Workforce",
+            summary: "Labor laws have officially shifted: kids as young as 6 can now legally apply for jobs.",
+            fullText: "The 'Youth Productivity Act' has passed. Major corporations like LionDew are already recruiting at elementary school career fairs. Jobs range from 'Internal Joy Consultants' to 'Small-Gap Inspectors.' Economic analysts suggest this could solve the national labor shortage immediately.",
+            img: "images/KidWorking.webp",
+            author: "Richard Gold",
+            date: "Jan 1, 2026"
+        },
+        {
+            tag: "FINANCE",
+            title: "Credit Cards for 7-Year-Olds",
+            summary: "Banks have lowered the minimum age for authorized users to 7.",
+            fullText: "Visa and Mastercard have unveiled the 'Lil' Spender' card. Featuring built-in limits on candy stores and a 'Parent-Pause' button, the cards allow 7-year-olds to build credit scores before they even finish math class. Playground economies are expected to boom.",
+            img: "images/KidBuying.webp",
+            author: "Penny Wiseman",
+            date: "Dec 30, 2025"
+        },
+        {
+            tag: "CORPORATE",
+            title: "FeatherFireChicken News",
+            summary: "The fast-food giant has announced a new menu line that is heating up the industry.",
+            fullText: "FeatherFireChicken (FFC) has shocked the culinary world by introducing their 'Volcano Wing'—a chicken wing so spicy it requires a signed waiver. The company also announced a merger with LionDew to create a 'Spice & Ice' meal deal. CEO Cluckington stated, 'We aren't just selling chicken; we're selling fire.'",
+            img: "images/FFCFood.webp",
+            author: "Crispy Carter",
+            date: "Jan 2, 2026"
+        },
+        {
+            tag: "BUSINESS",
+            title: "LionDew Company Expansion",
+            summary: "LionDew is dominating the beverage market this quarter with record-breaking sales.",
+            fullText: "LionDew has acquired three major soda competitors this week. Their new marketing campaign, 'Roar for Refreshment,' has gone viral among the new 6-year-old workforce. They are reportedly building a massive fountain at the center of the capital city.",
+            img: "images/Drink.webp",
+            author: "Bubbles McGee",
+            date: "Dec 29, 2025"
+        },
+        {
+            tag: "WORLD RECORD",
+            title: "89,473 KM in One Month",
+            summary: "Robert Sterling has shattered every known human limit, swimming nearly 90,000 kilometers.",
+            fullText: "Scientists are baffled by Robert Sterling. By swimming over 89,000 KM in 30 days, he has essentially circled the globe twice. When asked how he didn't sleep, Sterling simply replied, 'I just kept kicking.' Rumors suggest he may be part dolphin.",
+            img: "images/Swim.webp",
+            author: "Marina Tide",
+            date: "Jan 2, 2026"
+        },
+        {
+            tag: "INVESTIGATION",
+            title: "Lifeguard Vacations: Taxpayer Funded?",
+            summary: "A new investigation reveals that lifeguards are allegedly using tax dollars for holidays.",
+            fullText: "Documents leaked today show 'Project Sun-Tan,' a fund that allegedly used public beach safety taxes to send 400 lifeguards to the Maldives. The department defended the move, calling it 'Remote Water Surveillance Research.' Citizens are demanding a refund.",
+            img: "images/Relax.webp",
+            author: "I. M. Watching",
+            date: "Jan 2, 2026"
+        }
+    ];
+
+    const grid = document.getElementById('news-grid');
+    const articleView = document.getElementById('article-view');
+    const articleContent = document.getElementById('article-content');
+
+    articles.forEach((art, index) => {
+        const card = document.createElement('article');
+        card.className = 'section-card';
+        card.onclick = () => openArticle(index);
+        card.innerHTML = `
+            <img src="${art.img}" alt="${art.title}">
+            <div class="content">
+                <span class="tag">${art.tag}</span>
+                <h2>${art.title}</h2>
+                <p>${art.summary}</p>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    function openArticle(index) {
+        const art = articles[index];
+        articleContent.innerHTML = `
+            <span class="tag">${art.tag}</span>
+            <h1 style="font-size: 2rem; margin-top: 10px;">${art.title}</h1>
+            <p style="color: #666; font-family: Arial;">By ${art.author} | ${art.date}</p>
+            <img src="${art.img}" class="full-img">
+            <p style="font-size: 1.15rem; margin-top: 20px;">${art.fullText}</p>
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ddd;">
+            <p style="font-style: italic; color: #888;">&copy; 2026 Global News Daily. Content for demonstration purposes.</p>
+        `;
+        articleView.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Stop background scrolling
+        window.scrollTo(0,0);
+    }
+
+    function closeArticle() {
+        articleView.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+</script>
 
 </body>
 </html>
