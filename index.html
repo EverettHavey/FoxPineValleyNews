@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fox Pine Valley News | Home</title>
+    <style>
+        :root {
+            --primary: #1a2a3a;
+            --accent: #d35400;
+            --bg: #ffffff;
+            --text: #222;
+        }
+
+        body { font-family: 'Georgia', serif; margin: 0; background-color: #f4f4f4; color: var(--text); }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a { color: white; text-decoration: none; font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background-color: white; border-radius: 2px; }
+
+        /* Mobile Nav */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 58px;
+                left: 0;
+                background: var(--primary);
+                width: 100%;
+                padding: 20px 0;
+                text-align: center;
+                border-top: 1px solid #34495e;
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Swim.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: clamp(2.2rem, 10vw, 4.5rem); margin: 0; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 20px 0; font-family: Arial, sans-serif; }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        footer { text-align: center; padding: 40px; background: #222; color: #bbb; font-family: Arial, sans-serif; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Fox Pine Valley News</div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sections.html">Local News</a></li>
+        <li><a href="sections.html">Business</a></li>
+        <li><a href="sections.html">Sports</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h1>Truth in the Valley.</h1>
+    <p>Get the latest on the Age 6 Driving laws, the LionDew expansion, and Robert Sterling's historic swim.</p>
+    <a href="sections.html" class="btn">Read Today's Stories</a>
+</section>
+
+<footer>
+    &copy; 2026 Fox Pine Valley News Group | All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
